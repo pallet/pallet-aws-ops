@@ -14,6 +14,10 @@ Add the following to your dependencies:
 [com.palletops/pallet-aws-ops "0.1.0"]
 ```
 
+[API docs](http:/pallet.github.com/pallet-aws-ops/0.1/api/index.html).
+
+[Annotated source](http:/pallet.github.com/pallet-aws-ops/0.1/uberdoc.html).
+
 ## License
 
 Copyright © 2013 Hugo Duncan
