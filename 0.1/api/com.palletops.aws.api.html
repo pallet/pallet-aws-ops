@@ -1,0 +1,108 @@
+<html lang="en">
+  <head>
+    <title>com.palletops.aws.api documentation</title>
+    <link href="css/default.css" type="text/css" rel="stylesheet" />
+    <link href="css/codox-md.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/page_effects.js"></script>
+  </head>
+  <body>
+    <header>
+    <div data-scrollspy="scrollspy" class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <a href="/" class="brand">Pallet</a>
+          <ul class="nav">
+            <li class=""><a href="/doc">Documentation</a></li>
+            <li class=""><a href="/news">News</a></li>
+            <li class=""><a href="/blog">Blog</a></li>
+            <li class=""><a href="https://github.com/pallet/pallet">Code</a></li>
+            <li class=""><a href="/services">Services</a></li>
+            <li class=""><a href="/support">Support</a></li>
+            <li class=""><a href="/contact">Contact</a></li>
+          </ul>
+          <form action="http://www.google.com/search" method="get" class="pull-right">
+            <input placeholder="Search" value="" maxlength="255" name="q" type="text" />
+            <input value="palletops.com" type="hidden" name="sitesearch" />
+          </form>
+        </div>
+      </div>
+    </div>
+      <div id="header">
+        <h1><a href="http://palletops.com"><span class="project-title">Pallet-aws-ops 0.1.0 API documentation</span></a></h1>
+      </div>
+    </header>
+    <navigation>
+      <div id="namespaces" class="sidebar">
+        <h3>Namespaces</h3>
+        <ul class="ns-links">
+          <li class="ns-list"><a class="ns-link ns-name" href="com.palletops.aws.api.html">com.palletops.aws.api</a></li><li class="ns-list"><a class="ns-link ns-name" href="com.palletops.aws.instance-poller.html">com.palletops.aws.instance-poller</a></li><li class="ns-list"><a class="ns-link ns-name" href="com.palletops.aws.node.html">com.palletops.aws.node</a></li>
+        </ul>
+      </div>
+      <div id="vars" class="sidebar">
+        <h3>Public Vars</h3>
+        <ul class="ns-var-links">
+          <li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.api.html#var-dispatch">dispatch</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.api.html#var-processor">processor</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.api.html#var-start">start</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.api.html#var-stop">stop</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.api.html#var-submit">submit</a></li>
+        </ul>
+      </div>
+    </navigation>
+    <article>
+      <div id="content" class="namespace-docs">
+        <h2 class="namespace-title">com.palletops.aws.api documentation</h2>
+        <div class="doc"><p>An api for aws</p>
+</div>
+        <div class="ns-vars">
+          <div class="public">
+            <h3><a id="var-dispatch" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/api.clj#cl-36">dispatch</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [client], :as request}]</div>
+            
+            
+            <div class="doc"><p>Process a request.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-processor" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/api.clj#cl-46">processor</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[chan]</div>
+            
+            
+            <div class="doc"><p>Starts a processor for AWS API calls.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-start" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/api.clj#cl-66">start</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [thread-count channel], :or {thread-count 1, channel (chan 2)}, :as options}]</div>
+            
+            
+            <div class="doc"><p>Start an instance of the aws api.  Takes a map with an optional
+<code>:channel</code> for the input channel, a <code>:thread-count</code> that determines
+the number of threads to run.  Returns a map with the input options
+and <code>:result-channels</code> with a sequence of channels, one for the result
+of each thread.  The return map is suitable for passing to <code>submit</code>.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-stop" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/api.clj#cl-81">stop</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [channel]}]</div>
+            
+            
+            <div class="doc"><p>Stop an instance of the aws api.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-submit" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/api.clj#cl-86">submit</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [channel], :as api} request &amp; {:keys [reply-channel], :or {reply-channel (chan)}}]</div>
+            
+            
+            <div class="doc"><p>Submit a request map to an api instance.  Can be used to submit a map as
+returned by pallet-amazonica.</p>
+
+<p>Returns a channel on which the result will be written.</p>
+</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </body>
+
+</html>

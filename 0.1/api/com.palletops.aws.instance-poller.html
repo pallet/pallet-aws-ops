@@ -1,0 +1,109 @@
+<html lang="en">
+  <head>
+    <title>com.palletops.aws.instance-poller documentation</title>
+    <link href="css/default.css" type="text/css" rel="stylesheet" />
+    <link href="css/codox-md.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/page_effects.js"></script>
+  </head>
+  <body>
+    <header>
+    <div data-scrollspy="scrollspy" class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <a href="/" class="brand">Pallet</a>
+          <ul class="nav">
+            <li class=""><a href="/doc">Documentation</a></li>
+            <li class=""><a href="/news">News</a></li>
+            <li class=""><a href="/blog">Blog</a></li>
+            <li class=""><a href="https://github.com/pallet/pallet">Code</a></li>
+            <li class=""><a href="/services">Services</a></li>
+            <li class=""><a href="/support">Support</a></li>
+            <li class=""><a href="/contact">Contact</a></li>
+          </ul>
+          <form action="http://www.google.com/search" method="get" class="pull-right">
+            <input placeholder="Search" value="" maxlength="255" name="q" type="text" />
+            <input value="palletops.com" type="hidden" name="sitesearch" />
+          </form>
+        </div>
+      </div>
+    </div>
+      <div id="header">
+        <h1><a href="http://palletops.com"><span class="project-title">Pallet-aws-ops 0.1.0 API documentation</span></a></h1>
+      </div>
+    </header>
+    <navigation>
+      <div id="namespaces" class="sidebar">
+        <h3>Namespaces</h3>
+        <ul class="ns-links">
+          <li class="ns-list"><a class="ns-link ns-name" href="com.palletops.aws.api.html">com.palletops.aws.api</a></li><li class="ns-list"><a class="ns-link ns-name" href="com.palletops.aws.instance-poller.html">com.palletops.aws.instance-poller</a></li><li class="ns-list"><a class="ns-link ns-name" href="com.palletops.aws.node.html">com.palletops.aws.node</a></li>
+        </ul>
+      </div>
+      <div id="vars" class="sidebar">
+        <h3>Public Vars</h3>
+        <ul class="ns-var-links">
+          <li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.instance-poller.html#var-add-instance">add-instance</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.instance-poller.html#var-add-instances">add-instances</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.instance-poller.html#var-remove-instance">remove-instance</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.instance-poller.html#var-start">start</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="com.palletops.aws.instance-poller.html#var-stop">stop</a></li>
+        </ul>
+      </div>
+    </navigation>
+    <article>
+      <div id="content" class="namespace-docs">
+        <h2 class="namespace-title">com.palletops.aws.instance-poller documentation</h2>
+        <div class="doc"><p>A poller for instance-ids.</p>
+</div>
+        <div class="ns-vars">
+          <div class="public">
+            <h3><a id="var-add-instance" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/instance_poller.clj#cl-21">add-instance</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [config], :as poller} id {:keys [channel notify-when-f remove?], :as options}]</div>
+            
+            
+            <div class="doc"><p>Start polling an id. Writes the instance description to <code>channel</code>
+when the <code>notify-when-f</code> returns a truthy value when invoked on the
+instance description.  If <code>:remove?</code> is true (the default) the id is
+removed from the poller when the channel is notified.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-add-instances" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/instance_poller.clj#cl-32">add-instances</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [config], :as poller} idmaps]</div>
+            
+            
+            <div class="doc"><p>Start polling an ids. <code>idmaps</code> is a map from id to a map with <code>:promise</code> and
+<code>:notify-when-f</code> keys. Notifies <code>promise</code> when the <code>notify-when-f</code> function
+returns a truthy value when called with the instance.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-remove-instance" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/instance_poller.clj#cl-42">remove-instance</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [config], :as poller} id {:keys [channel notify-when-f], :as options}]</div>
+            
+            
+            <div class="doc"><p>Stop polling the specified id.
+No need to call this if you pass a <code>notify-status</code> to <code>poll</code>.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-start" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/instance_poller.clj#cl-99">start</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [credentials poll-interval api-channel instance-id-map poll-timeout], :or {poller-channel (chan), instance-id-map (atom {}), poll-timeout 10000, poll-interval 2000}, :as options}]</div>
+            
+            
+            <div class="doc"><p>Start a poller using the specified options.
+<code>:poll-interval</code> is in milliseconds.
+Returns a map with the poller.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-stop" class="source var-name" href="https://bitbucket.org/palletops/pallet-aws-ops/src/develop/src/src/com/palletops/aws/instance_poller.clj#cl-146">stop</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[{:keys [shutdown], :as poller}]</div>
+            
+            
+            <div class="doc"><p>Stop polling</p>
+</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </body>
+
+</html>
