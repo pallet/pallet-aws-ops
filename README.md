@@ -1,5 +1,7 @@
 # pallet-aws-ops
 
+[![Build Status](https://travis-ci.org/pallet/pallet-aws-ops.svg?branch=release/0.1.1)](https://travis-ci.org/pallet/pallet-aws-ops)
+
 Provide basic operations on AWS, on top of pallet [awaze][awaze].
 
 Provides a forklift processor for dispatching aws requests, and an instance
