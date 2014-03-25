@@ -7,4 +7,4 @@
                  [org.clojure/tools.logging "0.2.6"]
                  [com.palletops/awaze "0.1.0"
                   :exclusions [commons-logging]]
-                 [org.clojure/core.async "0.1.242.0-44b1e3-alpha"]])
+                 [org.clojure/core.async "0.1.278.0-76b25b-alpha"]])
