@@ -3,6 +3,7 @@
   (:require
    [clojure.tools.logging :refer [log warnf]]
    [com.palletops.awaze.ec2 :as ec2 :refer [ec2]]
+   [com.palletops.awaze.s3 :as s3 :refer [s3]]
    [clojure.core.async :refer [chan close! go thread >! >!! <! <!!]]))
 
 (defn debugf
@@ -29,6 +30,14 @@
   [{:as request}]
   (try
     (ec2 request)
+    (catch Exception e
+      (warnf e "process-aws-request error")
+      {:exception e})))
+
+(defmethod process-aws-request :s3
+  [{:as request}]
+  (try
+    (s3 request)
     (catch Exception e
       (warnf e "process-aws-request error")
       {:exception e})))
