@@ -11,7 +11,7 @@ a promise.
 Add the following to your dependencies:
 
 ```clj
-[com.palletops/pallet-aws-ops "0.1.0"]
+[com.palletops/pallet-aws-ops "0.1.1"]
 ```
 
 [API docs](http:/pallet.github.com/pallet-aws-ops/0.1/api/index.html).
