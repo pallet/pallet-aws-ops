@@ -1,5 +1,4 @@
-{:dev {:dependencies [[ch.qos.logback/logback-classic "1.0.9"]
-                      [org.slf4j/jcl-over-slf4j "1.7.3"]]
+{:dev {:dependencies [[org.slf4j/jcl-over-slf4j "1.7.5"]]
        :checkout-deps-shares [:source-paths :test-paths :resource-paths
                               :compile-path]
        :plugins [[codox/codox.leiningen "0.6.4"]
