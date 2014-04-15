@@ -1,5 +1,7 @@
 # pallet-aws-ops
 
+[![Build Status](https://travis-ci.org/pallet/pallet-aws-ops.svg?branch=release/0.2.0)](https://travis-ci.org/pallet/pallet-aws-ops)
+
 Provide basic operations on AWS, on top of pallet [awaze][awaze].
 
 Provides a forklift processor for dispatching aws requests, and an instance
@@ -11,7 +13,7 @@ a promise.
 Add the following to your dependencies:
 
 ```clj
-[com.palletops/pallet-aws-ops "0.1.1"]
+[com.palletops/pallet-aws-ops "0.2.0"]
 ```
 
 [API docs](http:/pallet.github.com/pallet-aws-ops/0.1/api/index.html).
