@@ -1,10 +1,10 @@
 (ns com.palletops.aws.api
   "An api for aws"
   (:require
-   [clojure.tools.logging :refer [log warnf]]
+   [clojure.tools.logging :refer [log trace tracef warnf]]
    [com.palletops.awaze.ec2 :as ec2 :refer [ec2]]
    [com.palletops.awaze.s3 :as s3 :refer [s3]]
-   [clojure.core.async :refer [chan close! go thread >! >!! <! <!!]]))
+   [clojure.core.async :refer [chan close! go put! thread >! >!! <! <!!]]))
 
 (defn debugf
   [fmt & args]
@@ -30,7 +30,7 @@
   [{:as request}]
   (try
     (ec2 request)
-    (catch Exception e
+    (catch Throwable e
       (warnf e "process-aws-request error")
       {:exception e})))
 
@@ -38,7 +38,7 @@
   [{:as request}]
   (try
     (s3 request)
-    (catch Exception e
+    (catch Throwable e
       (warnf e "process-aws-request error")
       {:exception e})))
 
@@ -47,25 +47,41 @@
   [{:keys [client] :as request}]
   (debugf "dispatch %s" (pr-str (dissoc request :credentials)))
   (let [result (process-aws-request request)]
-    (debugf "dispatch reply %s" (pr-str result))
+    (tracef "dispatch reply %s" (pr-str result))
     (if result
       result
       {:return true})))
 
+(defn dispatch-request
+  [{:keys [reply-channel] :as request}]
+  (tracef "dispatch-request %s"
+          (pr-str (dissoc request :credentials :reply-channel)))
+  (try
+    (if reply-channel
+      (put! reply-channel (dispatch (dissoc request :reply-channel)))
+      (errorf "processor request without reply-channel %s" request))
+    (catch Throwable e
+      (exceptionf
+       e "Unexpected processor exception %s" (.getMessage e))
+      (put! reply-channel {:exception e})))
+  (tracef "dispatch-request completed"))
+
 (defn processor
   "Starts a processor for AWS API calls."
-  [chan]
+  [ch]
   (go
-   (loop [{:keys [reply-channel] :as request} (<! chan)]
-     (when request
-       (try
-         (if reply-channel
-           (>! reply-channel (dispatch (dissoc request :reply-channel)))
-           (errorf "processor request without reply-channel %s" request))
-         (catch Exception e
-           (exceptionf e "Unexpected processor exception %s" (.getMessage e))))
-       (recur (<! chan))))
-   (debugf "processor finishing")))
+    (debugf "api processor starting")
+    (try
+      (loop [request (<! ch)]
+        (tracef "processor %s" (pr-str request))
+        (when request
+          (dispatch-request request)
+          (trace "processor looping")
+          (recur (<! ch))))
+      (catch Throwable e
+        (exceptionf
+         e "Unexpected api processor exception, terminated")))
+    (debugf "api processor finished")))
 
 ;;; ## API
 
@@ -97,13 +113,12 @@
   returned by pallet-amazonica.
 
   Returns a channel on which the result will be written."
-  [{:keys [channel] :as api}
-   request
-   & {:keys [reply-channel]
-      :or {reply-channel (chan)}}]
-  {:pre [(map? request)]}
-  (>!! channel (assoc request :reply-channel reply-channel))
-  reply-channel)
+  ([{:keys [channel] :as api} request reply-channel]
+     {:pre [(map? request)]}
+     (put! channel (assoc request :reply-channel reply-channel))
+     reply-channel)
+  ([api request]
+     (submit api request (chan))))
 
 (defn execute
   [{:keys [channel] :as api} request]
