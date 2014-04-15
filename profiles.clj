@@ -3,9 +3,10 @@
                               :compile-path]
        :plugins [[codox/codox.leiningen "0.6.4"]
                  [lein-marginalia "0.7.1"]
-                 [lein-pallet-release "0.1.3"]]
-       :pallet-release {:url "https://pbors:${GH_TOKEN}@github.com/pallet/pallet-aws-ops.git",
-                        :branch "master"}}
+                 [lein-pallet-release "RELEASE"]]
+       :pallet-release
+       {:url "https://pbors:${GH_TOKEN}@github.com/pallet/pallet-aws-ops.git",
+        :branch "master"}}
  :doc {:dependencies [[com.palletops/pallet-codox "0.1.0"]]
        :codox {:writer codox-md.writer/write-docs
                :output-dir "doc/0.1/api"
