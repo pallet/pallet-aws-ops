@@ -1,7 +1,7 @@
 (ns com.palletops.aws.keypair
   "Manage EC2 keypairs using an async interface."
   (:require
-   [clojure.core.async :refer [>! chan put!]]
+   [clojure.core.async :refer [<! >! chan put!]]
    [clojure.string :refer [join]]
    [com.palletops.awaze.ec2 :as ec2]
    [com.palletops.aws.api :as aws]
