@@ -1,3 +1,13 @@
+## 0.2.1
+
+- Add missing refers
+
+- Add extra logging of exceptions
+
+- Update to awaze 0.1.2
+
+- Update test configuration
+
 ## 0.2.0
 
 - Add keypair and security-group functions

@@ -1,7 +1,7 @@
 (ns com.palletops.aws.security-group
   "Manage EC2 security groups using an async interface."
   (:require
-   [clojure.core.async :refer [>! chan put!]]
+   [clojure.core.async :refer [<! >! chan put!]]
    [clojure.string :refer [join]]
    [com.palletops.awaze.ec2 :as ec2]
    [com.palletops.aws.api :as aws]

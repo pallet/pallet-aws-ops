@@ -1,7 +1,7 @@
 (ns com.palletops.aws.api
   "An api for aws"
   (:require
-   [clojure.tools.logging :refer [log trace tracef warnf]]
+   [clojure.tools.logging :as logging :refer [log trace tracef warnf]]
    [com.palletops.awaze.ec2 :as ec2 :refer [ec2]]
    [com.palletops.awaze.s3 :as s3 :refer [s3]]
    [clojure.core.async :refer [chan close! go put! thread >! >!! <! <!!]]))
@@ -31,7 +31,7 @@
   (try
     (ec2 request)
     (catch Throwable e
-      (warnf e "process-aws-request error")
+      (logging/debugf e "process-aws-request error")
       {:exception e})))
 
 (defmethod process-aws-request :s3
@@ -39,7 +39,7 @@
   (try
     (s3 request)
     (catch Throwable e
-      (warnf e "process-aws-request error")
+      (logging/debugf e "process-aws-request error")
       {:exception e})))
 
 (defn dispatch
