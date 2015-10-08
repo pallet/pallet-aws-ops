@@ -1,4 +1,4 @@
-(defproject com.palletops/pallet-aws-ops "0.2.2-SNAPSHOT"
+(defproject com.palletops/pallet-aws-ops "0.2.2"
   :description "Basic operations for building on aws"
   :url "https://github.com/pallet/pallet-aws-ops"
   :license {:name "Eclipse Public License"
