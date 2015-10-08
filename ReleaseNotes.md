@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Update to awaze 0.1.3
+
 ## 0.2.1
 
 - Add missing refers
